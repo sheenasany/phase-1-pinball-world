@@ -18,13 +18,15 @@ fetch(gameUrl)
 const displayList = (games) => {
     // console.log(gameData[0])
     return games.map(game => {
-        // console.log(game)
         const title = document.createElement('h5')
         title.textContent = `${game.name} <${game.manufacturer_name}>`
         // console.log(title)
         gameList.append(title)
-        title.addEventListener('click', () => (displayDetails(game)))
-        // strange to note, console.log returns undefined on displayDetails callback function
+        title.addEventListener('click', () => displayDetails(game))
+        // strange to note, console.log returns undefined on displayDetails
+        // reason: because the function does not have a return value which it doesn't need to return a value
+        // if we try to console.log the function w/o invocation, we get the function statement
+        // we can also try the console log in the fetch w/o invocation and see the same function statement
     }
 )}
 // grab all the detail elements
@@ -39,6 +41,7 @@ const displayDetails = (game) => {
     highScore.textContent = game.high_score
     // console.log(image, detailTitle, highScore)
 }
+
 gameForm.addEventListener("submit", (e) => {
     e.preventDefault()
     // alert("submitted punk!")
